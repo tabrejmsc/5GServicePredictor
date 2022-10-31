@@ -1,0 +1,237 @@
+{% block head %}
+	<title>5G services  Prediction</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+	<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
+	<link href="{{ url_for('static', filename='css/jquery-ui.css') }}"  rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/all.css') }}"  rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/css.css') }}"  rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/theme-default.min.css') }}" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block body %}
+	<div id="loading"><div class="loader"></div></div>
+	<canvas id="anpr-canvas"></canvas>
+	
+	<div class="main">
+		
+		<!-- Navigation -->
+		<nav class="main-nav navbar navbar-expand-lg bg-lignt fixed-top">
+		
+			<div class="color-line color-secondary-darker">
+                <div class="color-primary-light"></div>
+                <div class="color-primary"></div>
+                <div class="color-blue-dark"></div>
+            </div>		
+		
+			<div class="container">
+				<a class="logo" href="#"><img src="../static/img/logo.png" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="main-nav-links navbar-nav ml-auto">					
+
+
+						<li class="nav-item active dropdown">
+							<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About us</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+								<a class="dropdown-item" href="https://www.kau.edu.sa/Default-0057865-EN">Mr.Tabrej Khan</a>
+
+
+							</div>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		
+		
+		
+		<br/><br/>
+
+		
+		<div class="app">
+			<div class="container pb-5">
+			    <h4 class="text-center title">Predicting the 5G/B5G Services Using Machine Learning</h4>
+				<div class="app-box">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs anpr-tabs" role="tablist">
+					
+						<li class="nav-item" id="manual-tab">
+							<a class="nav-link" data-toggle="tab" href="#manual">About 5G/B5g</a>
+						</li>
+						<li class="nav-item" id="automatic-tab">
+							<a class="nav-link" data-toggle="tab" href="#automatic">5G Services Prediction</a>
+						</li>
+						<li class="nav-item" id="result-tab">
+							<a class="nav-link active" data-toggle="tab" href="#result">Result</a>
+						</li>
+						
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						
+						<div id="manual" class="container tab-pane"><br>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="manual-video-box">
+									   <img src="{{ url_for('static', filename='img/type-2-diabetes-49a3ee.jpg') }}" width="1000" height="720" alt="">
+										
+										
+										<div id="manual-image"></div>
+																											
+									</div>
+								</div>
+								<div class="col-md-8 no-padding">
+									<div class="manual-table-box">										
+										<table class="manual-table styled-table table table-bordered table-fixed">
+											<thead class="manual-table-head">
+												<tr>
+
+												</tr>
+											</thead>
+											<tbody class="manual-table-body">
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div id="automatic" class="container tab-pane fade"><br>
+							<div class="row">
+								
+								<div class="col-md-8 no-padding">
+									<div class="automatic-table-box">
+										<div class="my-3 text-center">
+											<div class="alert registration-success-message alert-success" role="alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<strong>Congratulations!</strong>  You have been registered successfully!
+											</div>
+											<form action="/fiveg" method="POST">
+											<div class="form-group">
+													Jitter (ms): <input type="text" id="jitter" name="jitter"  required="required">        [Values from 0.03 to 31]<br>
+											</div>
+											<div class="form-group">
+													 Bit Rate (Mbps):<input type="text" id="bitrate" name="bitrate"  required="required">   [Values from 0.2 to 50]<br>
+
+											</div>
+											<div class="form-group">
+													 Packet Loss Rate (%):<input type="text" id="packetlossrate" name="packetlossrate"  required="required">   [Values from 0.0000000011 to 5.1]<br>
+											</div>
+
+
+												<input type="submit" class="btn btn-primary" value="Predict">
+												
+											</form>	
+										</div>
+									</div>	
+								</div>
+							</div>						
+						</div>
+						<div id="result" class="container tab-pane active"><br>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="result-video-box">
+									   
+										<img src="{{ url_for('static', filename='img/result.jpg') }}" alt="" width="330px" height="500px">
+										
+										<div id="result-image"></div>
+																											
+									</div>
+								</div>
+								<div class="col-md-8 no-padding">
+									<div class="result-table-box">										
+										<table class="result-table styled-table table table-bordered table-fixed">
+											<thead class="result-table-head">
+												<tr>
+													<h4><b>Predicted Scored label for 5G/B5G Services </b></h4><br/>
+													<h7><b>{{result}}</b></h7><br/><br/>
+
+
+
+												</tr>
+												<tr>
+
+												</tr>
+
+											</thead>
+											<tbody class="result-table-body">
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+
+							
+							<!-- Tab panes -->
+							<div class="tab-content"><br/>
+								
+								
+								
+								
+								
+								
+							</div>
+							<br/><br/>
+												
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- copyright -->
+		<section id="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<p class="text-md-left text-center">© 2019-2020 Copyright <a href="#">Mr.Tabrej Khan</a></p>
+					</div>
+					<div class="col-xs-12 col-md-6 ml-auto">
+						<div class="social-links text-md-right text-center">
+							<a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+							<a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+							<a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+							<a href="https://www.youtube.com/channel/UC8FrivtUBuk_oOlqV5hkmXg" class="youtube"><i class="fab fa-youtube"></i></a>
+							<a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- copyright -->
+		
+		<a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+		
+
+
+    </div>
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='jquery.form-validator.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.nicescroll.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/intlTelInput.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
